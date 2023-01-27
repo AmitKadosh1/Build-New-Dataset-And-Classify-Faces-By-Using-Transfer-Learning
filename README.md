@@ -48,6 +48,45 @@ After receiving the face location from the algorithm, we cut the face from the o
 <p align="center">
 Figure 2: Face Recognition. (a) The original image, (b) The image in gray scale, (c) Face recognition performed by the Cascade Classifier algorithm, (d) Cropping the face from original image and resize to 256x256.
 
+  #### Improving Face Recognition Algorithm by Rotation
+  Unfortunately, we noticed that the algorithm we described does not give good enough results - there are many images in which it fails to recognize faces. We delved into the images and found that the algorithm has more difficulty in images in which the faces are slightly rotated. In Figure 3 in the top row of images, you can see the result of the basic algorithm for the two images on the left - the algorithm did not find the face in both images. Following the importance of this algorithm in our case, in a situation where every image is important, we decided to improve the algorithm - we implemented a cyclic process to rotate the image by 15 degrees at each step. In Figure 3 in the bottom row of images, you can see the result after our improvement - the improved algorithm manages to recognize the face in both images. The improved algorithm provides about a 20% improvement in facial recognition. It's just a lot in this project.
+  
+ <p align="center">
+
+![Default](./examples/examples3.jpg)
+<p align="center">
+  Figure 3: (a) Original images, (b) Results of facial recognition algorithm – it can be seen that no faces are received in this case, (c) Results of  improved algorithmm – it can be seen that the new algorithm find the two faces in the image.
+  
+  ## Reference Model 
+  ### Reference model architecture
+  In order to see the effect of Transfer Learning and its contribution to improving the results in the case of a small dataset, we compared several Deep Learning models for image classification without using Transfer Learning at all.
+In this article we will present the model with which we got the "best" results for this series of models (which does not use Transfer Learning).
+This model is used as a starting point of reference for examining the contribution of Transfer Learning. Therefore, we will call this model the Reference Model.
+The Reference Model is built in the standard way for image classification in Deep Learning where the first part has convolution layers and the second part fully connected layers. Of course, activation is also used to break the linearity and pooling to reduce the dimensions of the image, which will be explained in detail later.
+The architecture of this model is shown in Figure 4.
+
+  <p align="center">
+
+![Default](./examples/examples4.jpg)
+<p align="center">
+  Figure 4: The architecture of Reference Model.
+  
+  ### Activation, Dropout and Pooling 
+  -	#### Activation Function
+  The key change made to the Perceptron that brought upon the era of deep learning is the addition of activation functions to the output of each neuron. These allow the learning of non-linear functions.
+In reference model we used ReLU (Rectified Linear Unit) activation functions.
+It is the most common activation function as it is fast to compute and does not bound the output (which helps with some issues during Gradient Descent).
+  - #### Dropout layer
+The dropout layer is a regularization technique that is commonly used in deep learning to prevent overfitting. It works by randomly "dropping out" (setting to zero) a certain fraction of the neurons during each forward pass. This means that a certain percentage of the neurons in the layer will not be activated and will not contribute to the output during training. The dropout probability is a hyperparameter that is set before training, and it determines the fraction of neurons that will be dropped out. In the reference model, the dropout probability is set to 0.2, which means that 20% of the neurons in the dropout layer will be dropped out during each forward pass. The dropout layer is usually used after the convolutional layers and before the fully connected layers, as it is more effective in preventing overfitting in these layers.
+- #### Pooling
+Pooling is a sliding window type technique, but instead of applying weights, which can be trained, it applies a statistical function of some type over the contents of its window.
+The most common type of pooling is called max pooling, and it applies the   function over the contents of the window.
+To understand the contribute of Pooling to generalization, let’s imagine the case where we have convolutional filters that, during training, learn to detect the digit “9” in various orientations within the input images. In order for the CNN to learn to classify the appearance of “9” in the image correctly, it needs to in some way “activate” whenever a “9” is found anywhere in the image, no matter what the size or orientation the digit is (except for when it looks like “6”, that is). 
+Pooling can assist with this higher level, generalized feature selection.
+  
+ 
+   
+
 
 
 
