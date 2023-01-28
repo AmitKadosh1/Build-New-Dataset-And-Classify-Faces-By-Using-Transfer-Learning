@@ -71,25 +71,34 @@ The architecture of this model is shown in Figure 4.
 <p align="center">
   Figure 4: The architecture of Reference Model.
   
-  ### Activation, Dropout and Pooling 
-  -	#### Activation Function
-  The key change made to the Perceptron that brought upon the era of deep learning is the addition of activation functions to the output of each neuron. These allow the learning of non-linear functions.
-In reference model we used ReLU (Rectified Linear Unit) activation functions.
-It is the most common activation function as it is fast to compute and does not bound the output (which helps with some issues during Gradient Descent).
-  - #### Dropout layer
-The dropout layer is a regularization technique that is commonly used in deep learning to prevent overfitting. It works by randomly "dropping out" (setting to zero) a certain fraction of the neurons during each forward pass. This means that a certain percentage of the neurons in the layer will not be activated and will not contribute to the output during training. The dropout probability is a hyperparameter that is set before training, and it determines the fraction of neurons that will be dropped out. In the reference model, the dropout probability is set to 0.2, which means that 20% of the neurons in the dropout layer will be dropped out during each forward pass. The dropout layer is usually used after the convolutional layers and before the fully connected layers, as it is more effective in preventing overfitting in these layers.
-- #### Pooling
-Pooling is a sliding window type technique, but instead of applying weights, which can be trained, it applies a statistical function of some type over the contents of its window.
-The most common type of pooling is called max pooling, and it applies the   function over the contents of the window.
-To understand the contribute of Pooling to generalization, let’s imagine the case where we have convolutional filters that, during training, learn to detect the digit “9” in various orientations within the input images. In order for the CNN to learn to classify the appearance of “9” in the image correctly, it needs to in some way “activate” whenever a “9” is found anywhere in the image, no matter what the size or orientation the digit is (except for when it looks like “6”, that is). 
-Pooling can assist with this higher level, generalized feature selection.
+  ### Results
+  #### Reference Model
+  The model we made yielded a result of 52.9412%, these results are little disappointing, but not so surprising, because it is 15 classes with very few images for training each class, and as we know Deep Learning works well when there is a lot of data. In figure 5 you can see the accuracy as function of epoch number during the training.
   
+ <p align="center">
+
+![Default](./examples/examples5‪.png)
+
+<p align="center">
+
+Figure 5: The accuracy of Reference Model on train and validation sets as function of epoch number during the training.
+
+### Transfer Learning - Feature Extraction
+First, we examined the case of Feature extraction, this    method    is    faster    and converges faster than Fine tuning, the results for this case can be seen in Table 1.
+
+ <p align="center">
  
-   
+|model name         |train accuracy         |validation accuracy         |test accuracy         |
+|----------------------|----------------------|----------------------|----------------------|
+|resnet18|100.0000%|83.1461%|77.0588%|
+|AlexNet|100.0000%|73.0337%|68.8235%|
+|vgg16| 100.0000%|74.1573%|61.7647%|
+|squeezenet1_0| 100.0000%|82.0225%|79.4118%| 
+|densenet121| 100.0000%|81.4607%|75.2941%|
 
+ <p align="center">
 
-
-
+Table 1: The results when using Transfer Learning in the case of Feature Extraction for 5 different architectures: resnet18, AlexNet, vgg16, squeezenet1_0, densent121. 
 
 
 
