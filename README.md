@@ -1,4 +1,4 @@
-# Build NewnDataset And Classify Faces By Using Transfer Learning
+# Build New Dataset And Classify Faces By Using Transfer Learning
 This is a class project as part of EE046211 - Deep Learning course @ Technion.  
 
 <p align="center">
