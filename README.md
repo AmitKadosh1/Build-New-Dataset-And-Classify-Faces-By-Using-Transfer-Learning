@@ -18,7 +18,30 @@ Therefore, we found it appropriate to prove the feasibility of implementing a sy
 The main difficulty expected in this project is that Deep Learning works well when there are many examples and in this project the number of examples is very few.
 In order to overcome this difficulty, we will use transfer learning which was trained on another dataset for a different purpose.
 
+## stam 
+### Dataset
+The dataset creation process consists of four steps.
+- Step 1:Collect images for all the people we want to train the network on, and put them inside folders into a folder called Original dataset.
+In our project we collected about 50 photos for 15 people.
 
+- Step 2: Run the code responsible for processing the images and extracting faces from them:
+  ``` preprocessing_dataset ```
+And after that :
+  ``` find_unrecognized_faces ```
+After running the code we will get a folder named Dataset after preprocessing.
+
+- Step 3: Manual filtering is performed to delete false identifications and face identifications of another person who appeared in the same photo. Move the relevant images to the Dataset after verify folder.
+
+- Step 4: Divide the dataset into train, validation and test by running the following code:
+  ``` split_verify_ds_to_train_val_test ```
+And you get a new folder named Final dataset with the divided dataset.
+
+### Training and test
+
+After creating the dataset we run the following code after training the program and choosing the best model:
+  ``` build_and_train_the_model ```
+And then do a test with the code:
+  ``` test_the_model ```
 
 ## Dataset
 ### Original Dataset
