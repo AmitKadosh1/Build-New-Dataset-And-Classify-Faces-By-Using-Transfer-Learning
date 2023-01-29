@@ -72,7 +72,7 @@ The images in the Dataset can have different characteristics, for example differ
 
 ![Default](./images/image1.jpg)
 <p align="center">
-Figure 1: Example of images from "Amit" class in "Original Dataset".
+Example of images from "Amit" class in "Original Dataset".
 
 ### Prepressing Dataset
 We used a built-in algorithm in Python called Cascade Classifier from a GitHub project which is based on classic Machine Learning. This algorithm has been widely used in many web projects.
@@ -81,7 +81,7 @@ After receiving the face location from the algorithm, we cut the face from the o
 
 ![Default](./images/image2.jpg)
 <p align="center">
-Figure 2: Face Recognition. (a) The original image, (b) The image in gray scale, (c) Face recognition performed by the Cascade Classifier algorithm, (d) Cropping the face from original image and resize to 256x256.
+Face Recognition. (a) The original image, (b) The image in gray scale, (c) Face recognition performed by the Cascade Classifier algorithm, (d) Cropping the face from original image and resize to 256x256.
 
 ### Improving Face Recognition Algorithm by Rotation
 Unfortunately, we noticed that the algorithm we described does not give good enough results - there are many images in which it fails to recognize faces. 
@@ -89,7 +89,7 @@ Following the importance of this algorithm in our case, in a situation where eve
   
 ![Default](./images/image3.jpg)
 <p align="center">
-Figure 3: (a) Original images, (b) Results of facial recognition algorithm – it can be seen that no faces are received in this case, (c) Results of improved algorithmm – it can be seen that the new algorithm find the two faces in the image.
+(a) Original images, (b) Results of facial recognition algorithm – it can be seen that no faces are received in this case, (c) Results of improved algorithmm – it can be seen that the new algorithm find the two faces in the image.
   
 ## Models and Results
 ### Reference Model
