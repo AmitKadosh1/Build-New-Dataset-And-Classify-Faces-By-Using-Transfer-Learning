@@ -7,10 +7,10 @@ Amit Kadosh</a>
 
   * [Files in The repository](#files-in-the-repository)
   * [Introduction](#introduction)
-  * [Steps to run the project](#steps-to-run-the-project)
-  * [Creating a Dataset](#creating-a-dataset) 
+  * [How to run this project?](#how-to-run-this-project?)
+  * [Visual examples from the dataset](#visual-examples-from-the-dataset) 
   * [Models](#models)
-  * [Results](#results)
+  * [Models and Results](#models-and-Results)
   * [Conclusion](#conclusion)
   * [Future Works](#future-works)
   * [Presentation](#presentation)
