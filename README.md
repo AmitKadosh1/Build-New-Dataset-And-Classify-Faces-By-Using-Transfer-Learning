@@ -28,7 +28,7 @@ Amit Kadosh</a>
 |Dataset after verify.zip| This folder contains the face images in our project, after filtering from the "Dataset after preprocessing" folder as will be explained later.|
 |Final dataset.zip| This folder contains the final dataset in our project. You can download this dataset in order to experiment with the system as you create a dataset that is suitable for you.|
 |Final Report.pdf| Final Report|
-|Images for README.md file| Images used for preview in README.md file|
+|Images| Images used for preview in README.md file|
 
 ## Introduction
 Face recognition and classification is an important capability that can have a wide variety of uses. For example, in a smart home, helping the blind, building personal albums and more.
