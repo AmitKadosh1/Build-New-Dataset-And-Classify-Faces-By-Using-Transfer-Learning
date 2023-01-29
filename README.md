@@ -159,7 +159,7 @@ We tested the augmentation described above on the best model - transfer learning
  
  In Figure 4 you can see the accuracy as a function of the epoch number for ResNet18 with augmentation - random rotation.
  
-![alt text](./images/image4.png)
+![LaMa](./images/image4.png)
 <p align="center">
   Figure 4: The accuracy of resnet18 with fine tuning and random rotation augmentation on train and validation sets as function of epoch number during the training.
   
@@ -171,7 +171,7 @@ In this situation we get accuracy of 92.9412% (even less good result than 100 ep
 
 In Figure 5 you can see the confusion matrix for this case.
 
-![alt text](./images/image5.png)
+![LaMa](./images/image5.png)
 <p align="center">
   Figure 5: Confusion matrix of resnet18 with fine tuning and random rotation augmentation.
   
