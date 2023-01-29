@@ -5,7 +5,7 @@ This is a class project as part of EE046211 - Deep Learning course @ Technion.
 Batel Shuminov</a>  •  
 Amit Kadosh</a>
 
-  * [Files in The Repository](#files-in-the-repository)
+  * [Files in The repository](#files-in-the-repository)
   * [Code files](#code-files)
   * [Introduction](#introduction)
   * [Steps to run the project](#steps-to-run-the-project)
@@ -21,21 +21,16 @@ Amit Kadosh</a>
 ## Files in the repository
 |File name         | Purpsoe |
 |----------------------|------|
-|Code files|Code files of the project|
-|Dataset after verify.zip| Prepared dataset of faces of the same size|
-|Final dataset.zip| The dataset is divided into train validation and test|
+|Code files|Folder that contain all code files in this project|
+|Code files\preprocessing_dataset.py|This code pass throw "Original Dataset" folder and recognized faces from images in this folder. All the face images save in "Dataset after preprocessing" folder in the same order.|
+|Code files\find_unrecognized_faces.py|This code can only be run after building the "Dataset after verify" folder as will be explained in a separate chapter on this page. This code compares the names of the files in the "Dataset after verify" folder and the original images folder "Original Dataset" and creates a text file inside the "Dataset Folder" folder that contains the names of all the files from which the algorithm did not detect a face.|
+|Code files\split_verify_ds_to_train_val_test.py|This code divides the images in the "Dataset after verify" folder into train, validation and test and saves them in a new structure in "Final dataset" folder.|
+|Code files\build_and_train_the_model.py|This code builds the model, trains it and also runs the following code ("test the model.py"). As will be explained below, the user can choose whether to use the "Reference Model" or to use Transfer Learning in one of two methods: "Feature Extraction" and "Fine Tuning". The Transfer Learning function in the code allows you to use one of 5 different architectures.|
+|Code files\test_the_model.py| This code calculate the results of the model trained on the test set, saves the accuracy percentages to a text file and saves an image of the confusion matrix.|
+|Dataset after verify.zip| This folder contains the face images in our project, after filtering from the "Dataset after preprocessing" folder as will be explained later.|
+|Final dataset.zip| This folder contains the final dataset in our project. You can download this dataset in order to experiment with the system as you create a dataset that is suitable for you.|
 |Final Report.pdf| Final Report|
-|examples| Images used for preview in README.md file|
-
-## Code files
-|File name         | Purpsoe |
-|----------------------|------|
-|`preprocessing_dataset.py`|Face recognition from photos|
-|`find_unrecognized_faces.py`| Prints the list of images in which it could not recognize a face (Optional)|
-|`split_verify_ds_to_train_val_test.py`| Dividing the dataset into train, validation and test|
-|`build_and_train_the_model.py`|Training on the dataset in several ways: reference model and learning transfer using two methods: Feature Extraction and Fine Tuning on 5 different architectures, and choosing the model that brings the best results|
-|`test_the_model.py`| Examining the model on the test|
-
+|Images for README.md file| Images used for preview in README.md file|
 
 ## Introduction
 Face recognition and classification is an important capability that can have a wide variety of uses. For example, in a smart home, helping the blind, building personal albums and more.
