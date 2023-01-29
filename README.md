@@ -9,7 +9,6 @@ Amit Kadosh</a>
   * [Introduction](#introduction)
   * [How to run this project?](#how-to-run-this-project?)
   * [Visual examples from the dataset](#visual-examples-from-the-dataset) 
-  * [Models](#models)
   * [Models and Results](#models-and-Results)
   * [Conclusion](#conclusion)
   * [Future Works](#future-works)
