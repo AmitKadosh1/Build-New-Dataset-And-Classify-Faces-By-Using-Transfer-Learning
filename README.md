@@ -6,6 +6,7 @@ Batel Shuminov</a>  •
 Amit Kadosh</a>
 
   * [Files in The Repository](#files-in-the-repository)
+  * [Code files](#code-files)
   * [Introduction](#introduction)
   * [Steps to run the project](#steps-to-run-the-project)
   * [Creating a Dataset](#creating-a-dataset) 
@@ -26,17 +27,19 @@ Amit Kadosh</a>
 |Final Report.pdf| Final Report|
 |examples| Images used for preview in README.md file|
 
+## Code files
+|File name         | Purpsoe |
+|----------------------|------|
+|`preprocessing_dataset.py`|Face recognition from photos|
+|`find_unrecognized_faces.py`| Prints the list of images in which it could not recognize a face (Optional)|
+|`split_verify_ds_to_train_val_test.py`| Dividing the dataset into train, validation and test|
+|`build_and_train_the_model.py`|Training on the dataset in several ways: reference model and learning transfer using two methods: Feature Extraction and Fine Tuning on 5 different architectures, and choosing the model that brings the best results|
+|`test_the_model.py`| Examining the model on the test|
+
 
 ## Introduction
-Face classification is an important capability that can have a wide variety of uses. for example:
-1. The system can be used to help blind people know who is at the front door of the house.
-2. The system can also be integrated into the smart home field - automatic opening of the house door or simply reading the name of the person standing at the entrance to the house.
-3. Creating personal albums - you can locate the photos in which a certain person appears and thus build a personal album for him easily.
-This area was not tested due to the lack of a suitable dataset.
-In addition, face classification is an individual problem of each person because each person knows different people and wants to classify them.
-Therefore, we found it appropriate to prove the feasibility of implementing a system based on Deep Learning for the purpose of face classification for a group of people on which the model will be trusted.
-The main difficulty expected in this project is that Deep Learning works well when there are many examples and in this project the number of examples is very few.
-In order to overcome this difficulty, we will use transfer learning which was trained on another dataset for a different purpose.
+Face recognition and classification is an important capability that can have a wide variety of uses. For example, in a smart home, helping the blind, building personal albums and more.
+In this project we will first improve a standard face recognition algorithm in Python which is based on classic ML and then we will train a deep learning model for the purpose of classify the face in the image into one of the 15 people on which the model was trained.
 
 ## Steps to run the project
 ### Dataset
@@ -48,7 +51,7 @@ In our project we collected about 50 photos for 15 people.
   ``` preprocessing_dataset ```
 And after that :
   ``` find_unrecognized_faces ```
-After running the code we will get a folder named Dataset after preprocessing.
+(Optional) After running the code we will get a folder named Dataset after preprocessing.
 
 - Step 3: Manual filtering is performed to delete false identifications and face identifications of another person who appeared in the same photo. Move the relevant images to the Dataset after verify folder.
 
@@ -56,7 +59,9 @@ After running the code we will get a folder named Dataset after preprocessing.
   ``` split_verify_ds_to_train_val_test ```
 And you get a new folder named Final dataset with the divided dataset.
 
-### Training and test
+The dataset creation process can be seen in the [next section](#creating-a-dataset).
+
+### Train and test the model
 
 After creating the dataset we run the following code after training the program and choosing the best model:
   ``` build_and_train_the_model ```
@@ -66,7 +71,7 @@ And then do a test with the code:
 ## Creating a Dataset
 ### Original Dataset
 The name Original Dataset represents the original images loaded into the array before any processing.
-The dataset for our project should contain images of some persons with different characteristics (for example, different situation, different lighting, different camera and more). There is no Dataset like this around the internet so we had to build it.
+The dataset for our project should contain images of some persons with different characteristics (for example, different situation, different lighting, different camera and more).
 In order for this project to be able after further hardware development to be used by anyone, we need to require a relatively low minimum threshold of images for each person. Therefore, we chose to use 50 images for each person.
 We built the dataset for this project from images from our personal smartphones and social networks. We collect data of 15 classes (different people) with each having only 50 images.
 We will save the images in a folder called "Original Dataset" which contains 15 folders for each of the people we want to teach our model.
@@ -77,11 +82,7 @@ Figure 1: Example of images from "Amit" class in "Original Dataset".
 
 ### Prepressing Dataset
 #### Face Recognition
-Now we will move to the second stage - the face recognition stage in the image.
-We used a built-in algorithm in Python called Cascade Classifier from a GitHub project which is based on classic Machine Learning. This algorithm has been widely used in many web projects.
-OpenCV uses machine learning algorithms to search for faces within a picture. For something like a face, might have 6,000 or more classifiers, all of which must match for a face to be detected (within error limits). the algorithm starts at the top left of a picture and moves down across small blocks of data, looking at each block, and check if is this a face. Since there are 6,000 or more tests per block, might have millions of calculations to do. To get around this, OpenCV uses cascades. The OpenCV cascade breaks the problem of detecting faces into multiple stages. For each block, it does a very rough and quick test. If that passes, it does a slightly more detailed test, and so on. The algorithm may have 30 to 50 of these stages or cascades, and it will only detect a face if all stages pass. The advantage is that the majority of the picture will return a negative during the first few stages, which means the algorithm won’t waste time testing all 6,000 features on it. Instead of taking hours, face detection can now be done in real time.
-This algorithm works with grayscale images, so in order to run the algorithm, we first converted the images to grayscale.
-After receiving the face location from the algorithm, we cut the face from the original color image. Finally, we resized it to 256x256 so that all the face photos would be the same size.
+For facial recognition we used a built-in algorithm in Python called Cascade Classifier from a GitHub project which is based on classic Machine Learning. This algorithm works with grayscale images, so in order to run the algorithm, we first converted the images to grayscale. After receiving the face location from the algorithm, we cut the face from the original color image. Finally, we resized it to 256x256 so that all the face photos would be the same size.
 
 
 
@@ -90,8 +91,7 @@ After receiving the face location from the algorithm, we cut the face from the o
 Figure 2: Face Recognition. (a) The original image, (b) The image in gray scale, (c) Face recognition performed by the Cascade Classifier algorithm, (d) Cropping the face from original image and resize to 256x256.
 
   #### Improving Face Recognition Algorithm by Rotation
-  Unfortunately, we noticed that the algorithm we described does not give good enough results - there are many images in which it fails to recognize faces. We delved into the images and found that the algorithm has more difficulty in images in which the faces are slightly rotated. In Figure 3 in the top row of images, you can see the result of the basic algorithm for the two images on the left - the algorithm did not find the face in both images. Following the importance of this algorithm in our case, in a situation where every image is important, we decided to improve the algorithm - we implemented a cyclic process to rotate the image by 15 degrees at each step. In Figure 3 in the bottom row of images, you can see the result after our improvement - the improved algorithm manages to recognize the face in both images. The improved algorithm provides about a 20% improvement in facial recognition. It's just a lot in this project.
-  
+  Unfortunately, we noticed that the algorithm we described does not give good enough results - there are many images in which it fails to recognize faces. We delved into the images and found that the algorithm has more difficulty in images in which the faces are slightly rotated. In Figure 3 in the top row of images, you can see the result of the basic algorithm for the two images on the left - the algorithm did not find the face in both images. Following the importance of this algorithm in our case, in a situation where every image is important, we decided to improve the algorithm - we implemented a cyclic process to rotate the image by 15 degrees at each step. In Figure 3 in the bottom row of images, you can see the result after our improvement - the improved algorithm manages to recognize the face in both images. The improved algorithm provides about a 20% improvement in facial recognition.  
 ![Default](./examples/examples3.jpg)
 <p align="center">
   Figure 3: (a) Original images, (b) Results of facial recognition algorithm – it can be seen that no faces are received in this case, (c) Results of  improved algorithmm – it can be seen that the new algorithm find the two faces in the image.
@@ -103,11 +103,8 @@ Figure 2: Face Recognition. (a) The original image, (b) The image in gray scale,
   
 ## Results
   ### Reference Model
-  The model we made yielded a result of 52.9412%, these results are little disappointing, but not so surprising, because it is 15 classes with very few images for training each class, and as we know Deep Learning works well when there is a lot of data. In figure 4 you can see the accuracy as function of epoch number during the training.
+  The model we made yielded a result of 52.9412%, these results are little disappointing, but not so surprising, because it is 15 classes with very few images for training each class, and as we know Deep Learning works well when there is a lot of data. 
 
-![alt text](./examples/examples5.png)
-<p align="center">
-  Figure 4: The accuracy of Reference Model on train and validation sets as function of epoch number during the training.
 
 ### Transfer Learning - Feature Extraction
 First, we examined the case of Feature extraction, this    method    is    faster    and converges faster than Fine tuning, the results for this case can be seen in Table 1.
@@ -124,11 +121,7 @@ First, we examined the case of Feature extraction, this    method    is    faste
  <p align="center">
  Table 1: The results when using Transfer Learning in the case of Feature Extraction for 5 different architectures: resnet18, AlexNet, vgg16, squeezenet1_0, densent121. 
 
-The improvement is very impressive - the best result was obtained from squeezenet1_0 and is 79.4118% on the Test. In Figure 5 you can see the accuracy as a function of the epoch number for squeezenet1_0.
-
-![alt text](./examples/examples6.png)
-<p align="center">
-  Figure 5: The accuracy of squeezenet1_0 model on train and validation sets as function of epoch number during the training.
+The improvement is very impressive - the best result was obtained from squeezenet1_0 and is 79.4118% on the Test.
 
 ### Transfer Learning - Fine Tuning
 We examined the training for the case of Fine Tuning. The results for this case can be seen in Table 2. We got a huge improvement of 14% from Feature extraction method, and a accuracy of 94.1176% on the test set for the ResNet18 architecture. These are already very impressive results.
@@ -147,11 +140,9 @@ We examined the training for the case of Fine Tuning. The results for this case 
 
 
 
-We note that for the AlexNet architecture, we accepted that the model is stuck at low percentages and does not improve even when changing the learning rate, and for vgg16 architecture, we accepted that it can't train with our resources since it requires a lot of memory. In Figure 6 you can see the accuracy as a function of the epoch number for resnet18. 
+We note that for the AlexNet architecture, we accepted that the model is stuck at low percentages and does not improve even when changing the learning rate, and for vgg16 architecture, we accepted that it can't train with our resources since it requires a lot of memory.
 
-![alt text](./examples/examples7.png)
-<p align="center">
-  Figure 6: The accuracy of resnet18 model on train and validation sets as function of epoch number during the training.
+
   
  ### Augmentation
 We tested the augmentation described above on the best model - transfer learning with ResNet18 with fine tuning method.  In table 3 you can see the results for each case. It can be seen that only using RandomRotation augmentation improved the results from the situation where we did not use augmentation at all.
@@ -166,11 +157,11 @@ We tested the augmentation described above on the best model - transfer learning
 <p align="center">
  Table 3: The results when using Augmentation for 4 different types: random rotation, random resize, gaussian noise, normalize, for the case of transfer learning with ResNet18 with fine tuning method.
  
- In Figure 7 you can see the accuracy as a function of the epoch number for ResNet18 with augmentation - random rotation.
+ In Figure 4 you can see the accuracy as a function of the epoch number for ResNet18 with augmentation - random rotation.
  
 ![alt text](./examples/examples8.png)
 <p align="center">
-  Figure 7: The accuracy of resnet18 with fine tuning and random rotation augmentation on train and validation sets as function of epoch number during the training.
+  Figure 4: The accuracy of resnet18 with fine tuning and random rotation augmentation on train and validation sets as function of epoch number during the training.
   
   We note that the number of epochs we did in the augmentation test is 300 compared to 100 when we tested the models.
 In order to prove that the improvement is not obtained because of increasing the epochs but because of the augmentation, we retrain ResNet18 without augmentations, but this time for 300 epochs instead of 100.
@@ -178,11 +169,11 @@ In this situation we get accuracy of 92.9412% (even less good result than 100 ep
 
 ### Best Model – Confusion Matrix.
 
-In Figure 8 you can see the confusion matrix for this case.
+In Figure 5 you can see the confusion matrix for this case.
 
 ![alt text](./examples/examples9.png)
 <p align="center">
-  Figure 8: Confusion matrix of resnet18 with fine tuning and random rotation augmentation.
+  Figure 5: Confusion matrix of resnet18 with fine tuning and random rotation augmentation.
   
 ## Conclusion
   
