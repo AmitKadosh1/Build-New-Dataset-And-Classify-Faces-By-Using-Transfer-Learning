@@ -55,8 +55,6 @@ It is recommended to collect at least 50 photos for each person, but the system 
 
 - Run the code "split_verify_ds_to_train_val_test". Inside the folder "Dataset Folders" a folder named "Final dataset" will be created.
 
-The dataset creation process can be seen in the [next section](#creating-a-dataset).
-
 ### stage 2 - Train and test the model:
 
 Run the code "build_and_train_the_model.py". important comments:
