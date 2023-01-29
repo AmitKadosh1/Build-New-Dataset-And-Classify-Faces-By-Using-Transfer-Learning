@@ -6,7 +6,6 @@ Batel Shuminov</a>  •
 Amit Kadosh</a>
 
   * [Files in The repository](#files-in-the-repository)
-  * [Code files](#code-files)
   * [Introduction](#introduction)
   * [Steps to run the project](#steps-to-run-the-project)
   * [Creating a Dataset](#creating-a-dataset) 
@@ -35,26 +34,33 @@ Amit Kadosh</a>
 ## Introduction
 Face recognition and classification is an important capability that can have a wide variety of uses. For example, in a smart home, helping the blind, building personal albums and more.
 In this project we will first improve a standard face recognition algorithm in Python which is based on classic ML and then we will train a deep learning model for the purpose of classify the face in the image into one of the 15 people on which the model was trained.
+During the project we examined the use of Transfer Learning using two methods - Feature extraction and Fine tuning.
+For the purpose of improving the generalization of the model, we used augmentations of various types.
 
-## Steps to run the project
-### Dataset
-The dataset creation process consists of four steps.
-- Step 1:Collect images for all the people we want to train the network on, and put them inside folders into a folder called Original dataset.
-In our project we collected about 50 photos for 15 people.
+## How to run this project?
+###stage 1 - Create the dataste:
+- Create a main folder for the project named as you wish. For the purpose of the example we will use the name "Final Project".
 
-- Step 2: Run the code responsible for processing the images and extracting faces from them:
-  ``` preprocessing_dataset ```
-And after that :
-  ``` find_unrecognized_faces ```
-(Optional) After running the code we will get a folder named Dataset after preprocessing.
+- Create a folder named "Dataset Folders" inside the "Final Project" folder. In "Dataset Folders" folder, create a folder named "Original Dataset". 
 
-- Step 3: Manual filtering is performed to delete false identifications and face identifications of another person who appeared in the same photo. Move the relevant images to the Dataset after verify folder.
+-  Collect at least images for all the people you want to train the network on, and put them inside "Original Dataset" folder.
+It is recommended to collect at least 50 photos for each person, but the system is expected to give good accuracy percentages even with less.
 
-- Step 4: Divide the dataset into train, validation and test by running the following code:
-  ``` split_verify_ds_to_train_val_test ```
-And you get a new folder named Final dataset with the divided dataset.
+- Download the "Code files" folder into the "Final Project" folder.
+
+- Run the code "preprocessing_dataset.py". Inside the folder "Dataset Folders" a folder named "Dataset after preprocessing" will be created.
+
+- Duplicate the "Dataset after preprocessing" folder and rename the new folder to "Dataset after verify".
+
+- Perform a manual filter for the images in the "Dataset after verify" folder - delete all the images that are not faces and also the images that are not the faces of the same person registered in the name of the class.
+
+- Run the code "split_verify_ds_to_train_val_test". Inside the folder "Dataset Folders" a folder named "Final dataset" will be created.
 
 The dataset creation process can be seen in the [next section](#creating-a-dataset).
+
+###stage 2 - Train and test the model:
+
+
 
 ### Train and test the model
 
