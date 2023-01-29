@@ -76,7 +76,7 @@ In order for this project to be able after further hardware development to be us
 We built the dataset for this project from images from our personal smartphones and social networks. We collect data of 15 classes (different people) with each having only 50 images.
 We will save the images in a folder called "Original Dataset" which contains 15 folders for each of the people we want to teach our model.
 
-![Default](./examples/examples1.jpg)
+![Default](./images/image1.jpg)
 <p align="center">
 Figure 1: Example of images from "Amit" class in "Original Dataset".
 
@@ -86,13 +86,13 @@ For facial recognition we used a built-in algorithm in Python called Cascade Cla
 
 
 
-![Default](./examples/examples2.jpg)
+![Default](./images/image2.jpg)
 <p align="center">
 Figure 2: Face Recognition. (a) The original image, (b) The image in gray scale, (c) Face recognition performed by the Cascade Classifier algorithm, (d) Cropping the face from original image and resize to 256x256.
 
   #### Improving Face Recognition Algorithm by Rotation
   Unfortunately, we noticed that the algorithm we described does not give good enough results - there are many images in which it fails to recognize faces. We delved into the images and found that the algorithm has more difficulty in images in which the faces are slightly rotated. In Figure 3 in the top row of images, you can see the result of the basic algorithm for the two images on the left - the algorithm did not find the face in both images. Following the importance of this algorithm in our case, in a situation where every image is important, we decided to improve the algorithm - we implemented a cyclic process to rotate the image by 15 degrees at each step. In Figure 3 in the bottom row of images, you can see the result after our improvement - the improved algorithm manages to recognize the face in both images. The improved algorithm provides about a 20% improvement in facial recognition.  
-![Default](./examples/examples3.jpg)
+![Default](./images/image3.jpg)
 <p align="center">
   Figure 3: (a) Original images, (b) Results of facial recognition algorithm – it can be seen that no faces are received in this case, (c) Results of  improved algorithmm – it can be seen that the new algorithm find the two faces in the image.
   
@@ -159,7 +159,7 @@ We tested the augmentation described above on the best model - transfer learning
  
  In Figure 4 you can see the accuracy as a function of the epoch number for ResNet18 with augmentation - random rotation.
  
-![alt text](./examples/examples8.png)
+![alt text](./images/image4.png)
 <p align="center">
   Figure 4: The accuracy of resnet18 with fine tuning and random rotation augmentation on train and validation sets as function of epoch number during the training.
   
@@ -171,7 +171,7 @@ In this situation we get accuracy of 92.9412% (even less good result than 100 ep
 
 In Figure 5 you can see the confusion matrix for this case.
 
-![alt text](./examples/examples9.png)
+![alt text](./images/image5.png)
 <p align="center">
   Figure 5: Confusion matrix of resnet18 with fine tuning and random rotation augmentation.
   
